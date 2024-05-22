@@ -1,5 +1,11 @@
 @import url("photographer.css");
 
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-family: "DM Sans", sans-serif;
     margin: 0;
@@ -11,11 +17,13 @@ header {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    height: 90px;
+    height: 130px;
 }
 
 h1 {
     color: #901C1C;
+    font-size: 36px;
+    font-weight: 400;
     margin-right: 100px;
 }
 
@@ -24,11 +32,16 @@ h1 {
     margin-left: 100px;
 }
 
+.logo img {
+    height: 100%;
+}
+
 .photographer_section {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 70px;
-    margin-top: 100px;
+    margin-top: 60px;
+    margin-bottom: 50px;
 }
 
 .photographer_section article {
@@ -37,14 +50,41 @@ h1 {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    gap: 4px;
+}
+
+.photographer_section article a {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px
 }
 
 .photographer_section article h2 {
     color: #D3573C;
     font-size: 36px;
+    font-weight: 400;
 }
 
 .photographer_section article img {
     height: 200px;
     width: 200px;
+    border-radius: 100px;
+    object-fit: cover;
+}
+
+
+.photographer_location {
+    color: #901C1C;
+    font-size: 13px;
+}
+
+.photographer_tagline {
+    font-size: 10px;
+}
+
+.photographer_price {
+    color: #757575;
+    font-size: 9px;
 }
