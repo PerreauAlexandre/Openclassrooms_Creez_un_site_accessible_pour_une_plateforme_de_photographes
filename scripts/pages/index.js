@@ -1,6 +1,6 @@
 async function getPhotographers() {
     // Récupération des photographes depuis l'API
-    const reponse = await fetch("../../data/photographers.json");
+    const reponse = await fetch(window.location.href + "/data/photographers.json");
     const photographers = await reponse.json();
     return photographers;
 }
