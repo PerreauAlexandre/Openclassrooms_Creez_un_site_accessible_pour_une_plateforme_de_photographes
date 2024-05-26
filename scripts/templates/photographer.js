@@ -1,47 +1,46 @@
-function photographerTemplate(data) {
-    const { name, city, country, tagline, price, portrait } = data;
+class photographerTemplate {
+    constructor(data) {
+        this._name = data.name;
+        this._city = data.city;
+        this._country = data.country;
+        this._tagline = data.tagline;
+        this._price = data.price;
+        this._portrait = data.portrait;
+    }
 
-    const picture = `assets/photographers/${portrait}`;
-
-    function getUserCardDOM() {
+    getUserCardDOM() {
         const article = document.createElement("article");
 
-        // const a = document.createElement("a");
-        // a.href = "./photographer.html";
-        // const img = document.createElement("img");
-        // img.setAttribute("src", picture);
-        // const h2 = document.createElement("h2");
-        // h2.textContent = name;
-        // a.appendChild(img);
-        // a.appendChild(h2);
-        
-        // const p = document.createElement("p");
-        // const locationDiv = document.createElement("div");
-        // locationDiv.textContent = `${city}, ${country}`;
-        // const taglineDiv = document.createElement("div");
-        // taglineDiv.textContent = tagline;
-        // const priceDiv = document.createElement("div");
-        // priceDiv.textContent = `${price}€/jour`;
-        // p.appendChild(locationDiv);
-        // p.appendChild(taglineDiv);
-        // p.appendChild(priceDiv);
+        const a = document.createElement("a");
+        a.href = "./photographer.html";
+        const img = document.createElement("img");
+        img.setAttribute("src", `assets/photographers/${this._portrait}`);
+        const h2 = document.createElement("h2");
+        h2.textContent = this._name;
 
-        // article.appendChild(a);
-        // article.appendChild(p);
+        a.appendChild(img);
+        a.appendChild(h2);
+        article.appendChild(a);
 
-        const userCard = `
-            <a href="./photographer.html">
-                <img src=${picture}>
-                <h2>${name}</h2>
-            </a>
-            <div class="photographer_location">${city}, ${country}</div>
-            <div class="photographer_tagline">${tagline}</div>
-            <div class="photographer_price">${price}€/jour</div>
-        `;
+        const informationDiv = document.createElement("div");
+        informationDiv.tabIndex = 0;
+        informationDiv.classList.add("photographer_informations");
+        const locationDiv = document.createElement("div");
+        locationDiv.classList.add("photographer_location");
+        locationDiv.textContent = `${this._city}, ${this._country}`;
+        const taglineDiv = document.createElement("div");
+        taglineDiv.classList.add("photographer_tagline");
+        taglineDiv.textContent = this._tagline;
+        const priceDiv = document.createElement("div");
+        priceDiv.classList.add("photographer_price");
+        priceDiv.textContent = `${this._price}€/jour`;
 
-        article.innerHTML = userCard;
+        informationDiv.appendChild(locationDiv);
+        informationDiv.appendChild(taglineDiv);
+        informationDiv.appendChild(priceDiv);
+
+        article.appendChild(informationDiv);
 
         return (article);
     }
-    return { name, picture, getUserCardDOM };
 }
