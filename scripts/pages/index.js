@@ -1,15 +1,11 @@
-function modifyURL(url) {   
-    let parsedURL = url;
-    // Vérifier si le chemin se termine par .html
-    if (url.endsWith(".html")) {
-        // Trouver l'index du dernier '/'
-        const lastSlashIndex = url.lastIndexOf("/");
-        
-        // Si un '/' est trouvé, supprimer la dernière partie de l'url
-        if (lastSlashIndex !== -1) {
-            parsedURL = url.substring(0, lastSlashIndex);
-        }
-    }
+function modifyURL(url) {  
+    // On crée un objet URL à partir de l'URL de la page
+    const objectURL = new URL(url);
+
+    // On récupère l'origine de l'URL
+    const parsedURL = objectURL.origin;
+    console.log(parsedURL);
+
     // Retourner l'URL modifiée
     return parsedURL;
 }

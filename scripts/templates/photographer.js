@@ -6,13 +6,14 @@ class photographerTemplate {
         this._tagline = data.tagline;
         this._price = data.price;
         this._portrait = data.portrait;
+        this._id = data.id;
     }
 
     getUserCardDOM() {
         const article = document.createElement("article");
 
         const a = document.createElement("a");
-        a.href = "./photographer.html";
+        a.href = `./photographer.html?id=${this._id}`;
         const img = document.createElement("img");
         img.setAttribute("src", `assets/photographers/${this._portrait}`);
         const h2 = document.createElement("h2");
