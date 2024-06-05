@@ -15,7 +15,8 @@ class photographerTemplate {
         const a = document.createElement("a");
         a.href = `./photographer.html?id=${this._id}`;
         const img = document.createElement("img");
-        img.setAttribute("src", `assets/photographers/${this._portrait}`);
+        img.src = `assets/photographers/${this._portrait}`;
+        img.alt = this._name;
         const h2 = document.createElement("h2");
         h2.textContent = this._name;
 
@@ -24,7 +25,6 @@ class photographerTemplate {
         article.appendChild(a);
 
         const informationDiv = document.createElement("div");
-        informationDiv.tabIndex = 0;
         informationDiv.classList.add("photographer_informations");
         const locationDiv = document.createElement("div");
         locationDiv.classList.add("photographer_location");
@@ -43,5 +43,16 @@ class photographerTemplate {
         article.appendChild(informationDiv);
 
         return (article);
+    }
+
+    fillUserInformations() {
+        const photographerName = document.querySelector(".name");
+        photographerName.textContent = this._name;
+        const photographerLocation = document.querySelector(".location");
+        photographerLocation.textContent = `${this._city}, ${this._country}`;
+        const photographerTagline = document.querySelector(".tagline");
+        photographerTagline.textContent = this._tagline;
+        const photographePortrait = document.querySelector(".portrait");
+        photographePortrait.setAttribute("src", `assets/photographers/${this._portrait}`);
     }
 }
