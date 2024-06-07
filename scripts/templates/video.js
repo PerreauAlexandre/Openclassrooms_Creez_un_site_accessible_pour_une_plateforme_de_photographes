@@ -1,7 +1,7 @@
-class imageTemplate {
+class videoTemplate {
     constructor(mediaData) {
         this._title = mediaData.title;
-        this._image = mediaData.image;
+        this._video = mediaData.video;
         this._likes = mediaData.likes;
     }
 
@@ -14,11 +14,10 @@ class imageTemplate {
 
         const a = document.createElement("a");
         a.href = "";
-        const img = document.createElement("img");
-        img.src = `assets/medias/${this._image}`;
-        img.alt = this._title;
+        const video = document.createElement("video");
+        video.src = `assets/medias/${this._video}`;
 
-        a.appendChild(img);
+        a.appendChild(video);
         article.appendChild(a);
 
         const informationDiv = document.createElement("div");

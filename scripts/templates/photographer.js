@@ -55,4 +55,14 @@ class photographerTemplate {
         const photographePortrait = document.querySelector(".portrait");
         photographePortrait.setAttribute("src", `assets/photographers/${this._portrait}`);
     }
+
+    fillUserPrice() {
+        const photographerPrice = document.querySelector(".price");
+        photographerPrice.textContent = `${this._price}€ / jour`;
+    }
+
+    fillUserNameModal() {
+        const madalPhotographerName = document.querySelector(".modal-photographer-name");
+        madalPhotographerName.textContent = this._name;
+    }    
 }

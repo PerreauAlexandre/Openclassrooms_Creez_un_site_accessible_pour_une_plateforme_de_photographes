@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
@@ -18,13 +18,19 @@
     </header>
     <main id="main">
       <div class="photograph-header">
-        <h1 class="name"></h1>
-        <div class="location"></div>
-        <div class="tagline"></div>
+        <div class="photographer-attributes">
+          <h1 class="name"></h1>
+          <div class="location"></div>
+          <div class="tagline"></div>
+        </div>
         <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
         <img class="portrait" src="" alt="">
       </div>
       <div class="media-section"></div>
+      <aside class="additionnal-informations">
+        <div class="total-likes"></div>
+        <div class="price"></div>
+      </aside>
     </main>
     <div id="contact_modal">
 			<div class="modal">
@@ -32,12 +38,19 @@
           <h2>Contactez-moi</h2>
           <img src="assets/icons/close.svg" onclick="closeModal()" />
         </header>
-				<form>
+        <h3 class="modal-photographer-name"></h3>
+				<form class="form">
 					<div>
-						<label>Prénom</label>
-						<input />
+            <label for="first">Prénom</label>
+            <input type="text" id="first" name="first">
+            <label for="last">Nom</label>
+            <input type="text" id="last" name="last">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email">
+            <label for="textarea">Votre message</label>
+            <input type="textarea" id="textarea" name="textarea">
 					</div>
-          <button class="contact_button">Envoyer</button>
+          <button type="submit" class="contact_button">Envoyer</button>
 				</form>
 			</div>
 		</div>
@@ -45,6 +58,7 @@
     <script src="scripts/utils/getDatas.js"></script>
     <script src="/scripts/templates/photographer.js"></script>
     <script src="/scripts/templates/image.js"></script>
+    <script src="/scripts/templates/video.js"></script>
     <script src="/scripts/factories/mediaTemplateFactorie.js"></script>
     <script src="/scripts/pages/photographer.js"></script>
     <script src="/scripts/utils/contactForm.js"></script>
