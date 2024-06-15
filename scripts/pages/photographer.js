@@ -14,18 +14,19 @@ function getPhotographerId () {
     return photographerId;
 }
 
-async function displayMedia(medias) {
+async function displayMedia(mediasModel) {
     const mediaSection = document.querySelector(".media-section");
 
-    const totalLikes = document.querySelector(".total-likes");
-
-    let likes = 0;
-
-    medias.forEach((media) => {
-        const mediaModel = new MediaTemplateFactorie(media);
+    mediasModel.forEach((mediaModel) => {
         const mediaCardDOM = mediaModel.getMediaCardDOM();
         mediaSection.appendChild(mediaCardDOM);
+    });
+}
 
+async function displayLikes(mediasModel) {
+    const totalLikes = document.querySelector(".total-likes");
+    let likes = 0;
+    mediasModel.forEach((mediaModel) => {
         likes += mediaModel.likes;
     });
 
@@ -39,20 +40,22 @@ async function displayMedia(medias) {
 }
 
 
-
 async function initPhotographerPage() {
     // Récupère les datas du photographe et de ses différents médias
     const photographerId = parseInt(getPhotographerId());
     const { photographers, media } = await getDatas();
-    // On récupère les données du photographe
+    // On récupère et on traite les données du photographe
     const photographer = photographers.find(photographer => photographer.id === photographerId);
     const photographerModel = new photographerTemplate(photographer);
     photographerModel.fillUserInformations();
     photographerModel.fillUserPrice();
     photographerModel.fillUserNameModal();
-    // On filtre les médias du photographe
+    // On filtre et on traite les médias du photographe
     const photographerMedias = media.filter(media => media.photographerId === photographerId);
-    displayMedia(photographerMedias);
+    const mediasClass = photographerMedias.map(photographerMedia => new MediaTemplateFactorie(photographerMedia));
+    displayMedia(mediasClass);
+    displayLikes(mediasClass);
+    mediasClass[8].fillLightbox();
 }
 
 initPhotographerPage();
@@ -72,4 +75,12 @@ function closeModal() {
 form.addEventListener("submit", (event) => {
     event.preventDefault();
     modalContainer.style.display = "none";
+    const inputFirstName = document.getElementById("first");
+    console.log("Prénom : ", inputFirstName.value);
+    const inputLastName = document.getElementById("last");
+    console.log("Nom : ", inputLastName.value);
+    const inputEmail = document.getElementById("email");
+    console.log("Email : ", inputEmail.value);
+    const inputMessage = document.getElementById("textarea");
+    console.log("Message : ", inputMessage.value);
 });

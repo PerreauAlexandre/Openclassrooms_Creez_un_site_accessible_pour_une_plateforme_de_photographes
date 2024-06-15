@@ -38,4 +38,18 @@ class videoTemplate {
 
         return (article);
     }
+
+    fillLightbox() {
+        const lightboxMedia = document.querySelector(".lightbox-media");
+        lightboxMedia.innerHTML = "";
+
+        const video = document.createElement("video");
+        video.src = `assets/medias/${this._video}`;
+        video.controls = true;
+        const mediaTitle = document.createElement("div");
+        mediaTitle.textContent = this._title;
+
+        lightboxMedia.appendChild(video);
+        lightboxMedia.appendChild(mediaTitle);
+    }
 }

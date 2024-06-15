@@ -39,4 +39,18 @@ class imageTemplate {
 
         return (article);
     }
+
+    fillLightbox() {
+        const lightboxMedia = document.querySelector(".lightbox-media");
+        lightboxMedia.innerHTML = "";
+
+        const img = document.createElement("img");
+        img.src = `assets/medias/${this._image}`;
+        img.alt = this._title;
+        const mediaTitle = document.createElement("div");
+        mediaTitle.textContent = this._title;
+
+        lightboxMedia.appendChild(img);
+        lightboxMedia.appendChild(mediaTitle);
+    }
 }
