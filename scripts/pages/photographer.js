@@ -60,11 +60,14 @@ async function initPhotographerPage() {
     lightboxButtons.forEach((lightboxButton) => lightboxButton.addEventListener("click", (e) => {
         e.preventDefault();
         // On lance la fonction qui ouve la lightbox en fonction de l'Id media stocké en dataset
-        launchLightbox(lightboxButton.dataset.mediaId);
+        launchLightbox(parseInt(lightboxButton.dataset.mediaId));
     }));
+    const likesButtons = document.querySelectorAll(".like-logo");
+    likesButtons.forEach((likeButton) => likeButton.addEventListener("click", () => likeMedia(likeButton)));
 }
 
 let mediasModel = [];
+let currentMediaIndex = 0;
 
 initPhotographerPage();
 
@@ -93,13 +96,16 @@ form.addEventListener("submit", (event) => {
     console.log("Message : ", inputMessage.value);
 });
 
+
 // Gestion des éléments de la lightbox
+
 const lightbox = document.querySelector(".lightbox");
 
 function launchLightbox(mediaId) {
-    lightbox.style.display = "block";
-    const mediaIndex = mediasModel.findIndex(media => media.id == mediaId);
+    lightbox.style.display = "flex";
+    const mediaIndex = mediasModel.findIndex(media => media.id === mediaId);
     mediasModel[mediaIndex].fillLightbox();
+    currentMediaIndex = mediaIndex;
 }
 
 const closeLightboxBtn = document.querySelector(".close-lightbox");
@@ -107,4 +113,39 @@ closeLightboxBtn.addEventListener("click", closeLightbox);
 
 function closeLightbox() {
     lightbox.style.display = "none";
+}
+
+const previousLightboxBtn = document.querySelector(".previous");
+previousLightboxBtn.addEventListener("click", previousLightbox);
+
+function previousLightbox() {
+    if (currentMediaIndex === 0) {
+        currentMediaIndex = mediasModel.length - 1;
+    }
+    else {
+        currentMediaIndex--;
+    }
+    mediasModel[currentMediaIndex].fillLightbox();
+}
+
+const nextLightboxBtn = document.querySelector(".next");
+nextLightboxBtn.addEventListener("click", nextLightbox);
+
+function nextLightbox() {
+    if (currentMediaIndex === mediasModel.length - 1) {
+        currentMediaIndex = 0;
+    }
+    else {
+        currentMediaIndex++;
+    }
+    mediasModel[currentMediaIndex].fillLightbox();
+}
+
+
+// Gestion des likes
+
+function likeMedia(likeButton) {
+    const mediaIndex = mediasModel.findIndex(media => media.id === parseInt(likeButton.dataset.mediaId));
+    mediasModel[mediaIndex].incrementLike(likeButton);
+    displayLikes();
 }
