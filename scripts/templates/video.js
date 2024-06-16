@@ -1,5 +1,6 @@
 class videoTemplate {
     constructor(mediaData) {
+        this._id = mediaData.id;
         this._title = mediaData.title;
         this._video = mediaData.video;
         this._likes = mediaData.likes;
@@ -9,11 +10,17 @@ class videoTemplate {
         return this._likes;
     }
 
+    get id () {
+        return this._id;
+    }
+
     getMediaCardDOM() {
         const article = document.createElement("article");
 
         const a = document.createElement("a");
-        a.href = "";
+        a.href = "#";
+        a.classList.add("lightbox-button");
+        a.dataset.mediaId = this._id;
         const video = document.createElement("video");
         video.src = `assets/medias/${this._video}`;
 
@@ -48,6 +55,7 @@ class videoTemplate {
         video.controls = true;
         const mediaTitle = document.createElement("div");
         mediaTitle.textContent = this._title;
+        mediaTitle.classList.add("media-title");
 
         lightboxMedia.appendChild(video);
         lightboxMedia.appendChild(mediaTitle);

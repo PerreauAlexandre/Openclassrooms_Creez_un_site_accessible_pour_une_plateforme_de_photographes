@@ -14,7 +14,7 @@ function getPhotographerId () {
     return photographerId;
 }
 
-async function displayMedia(mediasModel) {
+async function displayMedia() {
     const mediaSection = document.querySelector(".media-section");
 
     mediasModel.forEach((mediaModel) => {
@@ -23,7 +23,7 @@ async function displayMedia(mediasModel) {
     });
 }
 
-async function displayLikes(mediasModel) {
+async function displayLikes() {
     const totalLikes = document.querySelector(".total-likes");
     let likes = 0;
     mediasModel.forEach((mediaModel) => {
@@ -39,7 +39,6 @@ async function displayLikes(mediasModel) {
     totalLikes.appendChild(likeLogo);
 }
 
-
 async function initPhotographerPage() {
     // Récupère les datas du photographe et de ses différents médias
     const photographerId = parseInt(getPhotographerId());
@@ -52,15 +51,24 @@ async function initPhotographerPage() {
     photographerModel.fillUserNameModal();
     // On filtre et on traite les médias du photographe
     const photographerMedias = media.filter(media => media.photographerId === photographerId);
-    const mediasClass = photographerMedias.map(photographerMedia => new MediaTemplateFactorie(photographerMedia));
-    displayMedia(mediasClass);
-    displayLikes(mediasClass);
-    mediasClass[8].fillLightbox();
+    mediasModel = photographerMedias.map(photographerMedia => new MediaTemplateFactorie(photographerMedia));
+    displayMedia();
+    displayLikes();
+
+    // On crée les évènement au clic pour lancer la lightbox
+    const lightboxButtons = document.querySelectorAll(".lightbox-button");
+    lightboxButtons.forEach((lightboxButton) => lightboxButton.addEventListener("click", (e) => {
+        e.preventDefault();
+        // On lance la fonction qui ouve la lightbox en fonction de l'Id media stocké en dataset
+        launchLightbox(lightboxButton.dataset.mediaId);
+    }));
 }
+
+let mediasModel = [];
 
 initPhotographerPage();
 
-
+// Gestion des éléments du form
 const modalContainer = document.getElementById("contact_modal");
 const form = document.querySelector(".form");
 
@@ -84,3 +92,19 @@ form.addEventListener("submit", (event) => {
     const inputMessage = document.getElementById("textarea");
     console.log("Message : ", inputMessage.value);
 });
+
+// Gestion des éléments de la lightbox
+const lightbox = document.querySelector(".lightbox");
+
+function launchLightbox(mediaId) {
+    lightbox.style.display = "block";
+    const mediaIndex = mediasModel.findIndex(media => media.id == mediaId);
+    mediasModel[mediaIndex].fillLightbox();
+}
+
+const closeLightboxBtn = document.querySelector(".close-lightbox");
+closeLightboxBtn.addEventListener("click", closeLightbox);
+
+function closeLightbox() {
+    lightbox.style.display = "none";
+}

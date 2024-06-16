@@ -1,5 +1,6 @@
 class imageTemplate {
     constructor(mediaData) {
+        this._id = mediaData.id;
         this._title = mediaData.title;
         this._image = mediaData.image;
         this._likes = mediaData.likes;
@@ -9,11 +10,17 @@ class imageTemplate {
         return this._likes;
     }
 
+    get id () {
+        return this._id;
+    }
+
     getMediaCardDOM() {
         const article = document.createElement("article");
 
         const a = document.createElement("a");
-        a.href = "";
+        a.href = "#";
+        a.classList.add("lightbox-button");
+        a.dataset.mediaId = this._id;
         const img = document.createElement("img");
         img.src = `assets/medias/${this._image}`;
         img.alt = this._title;
@@ -49,6 +56,7 @@ class imageTemplate {
         img.alt = this._title;
         const mediaTitle = document.createElement("div");
         mediaTitle.textContent = this._title;
+        mediaTitle.classList.add("media-title");
 
         lightboxMedia.appendChild(img);
         lightboxMedia.appendChild(mediaTitle);
