@@ -44,11 +44,50 @@
     cursor: pointer;
 }
 
+.contact_button:hover {
+    background-color: #D3573C;
+}
+
+.contact_button:focus {
+    background-color: #D3573C;
+}
+
 .portrait {
     height: 200px;
     width: 200px;
     border-radius: 100px;
     object-fit: cover;
+}
+
+
+/* filtre */
+
+.filter-container{
+    margin: 20px 100px 50px 100px;
+    display: flex;
+    align-items: center;
+}
+
+.filter-text {
+    margin-right: 20px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.filter {
+    width: 170px;
+    height: 69px;
+    background-color: #901C1C;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #FFFFFF;
+    text-align: center;
+    outline: none;
+}
+
+.to-hide {
+    display: none;
 }
 
 

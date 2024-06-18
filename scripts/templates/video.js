@@ -4,6 +4,8 @@ class videoTemplate {
         this._title = mediaData.title;
         this._video = mediaData.video;
         this._likes = mediaData.likes;
+        this._date = mediaData.date;
+        this._isLiked = false;
     }
 
     get likes () {
@@ -14,6 +16,14 @@ class videoTemplate {
         return this._id;
     }
 
+    get date () {
+        return this._date;
+    }
+
+    get title () {
+        return this._title;
+    }
+    
     getMediaCardDOM() {
         const article = document.createElement("article");
 

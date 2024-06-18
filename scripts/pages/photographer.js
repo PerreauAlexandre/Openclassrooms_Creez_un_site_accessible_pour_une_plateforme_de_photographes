@@ -15,8 +15,6 @@ function getPhotographerId () {
 }
 
 async function displayMedia() {
-    const mediaSection = document.querySelector(".media-section");
-
     mediasModel.forEach((mediaModel) => {
         const mediaCardDOM = mediaModel.getMediaCardDOM();
         mediaSection.appendChild(mediaCardDOM);
@@ -43,12 +41,14 @@ async function initPhotographerPage() {
     // Récupère les datas du photographe et de ses différents médias
     const photographerId = parseInt(getPhotographerId());
     const { photographers, media } = await getDatas();
+    
     // On récupère et on traite les données du photographe
     const photographer = photographers.find(photographer => photographer.id === photographerId);
     const photographerModel = new photographerTemplate(photographer);
     photographerModel.fillUserInformations();
     photographerModel.fillUserPrice();
     photographerModel.fillUserNameModal();
+
     // On filtre et on traite les médias du photographe
     const photographerMedias = media.filter(media => media.photographerId === photographerId);
     mediasModel = photographerMedias.map(photographerMedia => new MediaTemplateFactorie(photographerMedia));
@@ -62,16 +62,21 @@ async function initPhotographerPage() {
         // On lance la fonction qui ouve la lightbox en fonction de l'Id media stocké en dataset
         launchLightbox(parseInt(lightboxButton.dataset.mediaId));
     }));
+
+    // On crée les évènement au clic pour gérer les likes
     const likesButtons = document.querySelectorAll(".like-logo");
     likesButtons.forEach((likeButton) => likeButton.addEventListener("click", () => likeMedia(likeButton)));
 }
 
 let mediasModel = [];
 let currentMediaIndex = 0;
+const mediaSection = document.querySelector(".media-section");
 
 initPhotographerPage();
 
+
 // Gestion des éléments du form
+
 const modalContainer = document.getElementById("contact_modal");
 const form = document.querySelector(".form");
 
@@ -149,3 +154,31 @@ function likeMedia(likeButton) {
     mediasModel[mediaIndex].incrementLike(likeButton);
     displayLikes();
 }
+
+
+// Filtre 
+
+const filterBtn = document.querySelector(".filter");
+filterBtn.addEventListener("change", (e) => {
+    if (e.target.value === "Popularité") {
+        mediasModel.sort((a, b) => {
+            return b.likes - a.likes;
+        });
+        // console.log(mediasModel);
+    }
+    else if (e.target.value === "Date") {
+        mediasModel.sort((a, b) => {
+            const aDate = new Date(a.date);
+            const bDate = new Date(b.date);
+            return bDate.getTime() - aDate.getTime();
+        });
+        // console.log(mediasModel);
+    }
+    else if (e.target.value === "Titre") {
+        mediasModel.sort((a, b) => a.title.localeCompare(b.title));
+        // console.log(mediasModel);
+    }
+    mediaSection.innerHTML="";
+    displayMedia();
+});
+    
