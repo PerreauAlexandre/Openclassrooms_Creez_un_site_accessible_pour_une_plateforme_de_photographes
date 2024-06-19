@@ -45,11 +45,11 @@
 }
 
 .contact_button:hover {
-    background-color: #D3573C;
+    background-color: #DB8876;
 }
 
 .contact_button:focus {
-    background-color: #D3573C;
+    background-color: #DB8876;
 }
 
 .portrait {
@@ -258,7 +258,9 @@
     top: 0;
     height: 100%;
     width: 100%;
+    overflow: scroll;
     padding-top: 50px;
+    padding-bottom: 20px;
 }
 
 .modal {

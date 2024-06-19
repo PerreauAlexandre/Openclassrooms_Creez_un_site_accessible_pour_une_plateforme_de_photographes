@@ -19,6 +19,18 @@ async function displayMedia() {
         const mediaCardDOM = mediaModel.getMediaCardDOM();
         mediaSection.appendChild(mediaCardDOM);
     });
+
+    // On crée les évènement au clic pour lancer la lightbox
+    const lightboxButtons = document.querySelectorAll(".lightbox-button");
+    lightboxButtons.forEach((lightboxButton) => lightboxButton.addEventListener("click", (e) => {
+        e.preventDefault();
+        // On lance la fonction qui ouve la lightbox en fonction de l'Id media stocké en dataset
+        launchLightbox(parseInt(lightboxButton.dataset.mediaId));
+    }));
+
+    // On crée les évènement au clic pour gérer les likes
+    const likesButtons = document.querySelectorAll(".like-logo");
+    likesButtons.forEach((likeButton) => likeButton.addEventListener("click", () => likeMedia(likeButton)));
 }
 
 async function displayLikes() {
@@ -54,18 +66,6 @@ async function initPhotographerPage() {
     mediasModel = photographerMedias.map(photographerMedia => new MediaTemplateFactorie(photographerMedia));
     displayMedia();
     displayLikes();
-
-    // On crée les évènement au clic pour lancer la lightbox
-    const lightboxButtons = document.querySelectorAll(".lightbox-button");
-    lightboxButtons.forEach((lightboxButton) => lightboxButton.addEventListener("click", (e) => {
-        e.preventDefault();
-        // On lance la fonction qui ouve la lightbox en fonction de l'Id media stocké en dataset
-        launchLightbox(parseInt(lightboxButton.dataset.mediaId));
-    }));
-
-    // On crée les évènement au clic pour gérer les likes
-    const likesButtons = document.querySelectorAll(".like-logo");
-    likesButtons.forEach((likeButton) => likeButton.addEventListener("click", () => likeMedia(likeButton)));
 }
 
 let mediasModel = [];
