@@ -14,7 +14,7 @@ function getPhotographerId () {
     return photographerId;
 }
 
-async function displayMedia() {
+function displayMedia() {
     mediasModel.forEach((mediaModel) => {
         const mediaCardDOM = mediaModel.getMediaCardDOM();
         mediaSection.appendChild(mediaCardDOM);
@@ -33,7 +33,7 @@ async function displayMedia() {
     likesButtons.forEach((likeButton) => likeButton.addEventListener("click", () => likeMedia(likeButton)));
 }
 
-async function displayLikes() {
+function displayLikes() {
     const totalLikes = document.querySelector(".total-likes");
     let likes = 0;
     mediasModel.forEach((mediaModel) => {
