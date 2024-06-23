@@ -9,8 +9,9 @@ function getOriginURL(url) {
     if (parsedURL === "https://perreaualexandre.github.io") {
         return "https://perreaualexandre.github.io/Openclassrooms_Creez_un_site_accessible_pour_une_plateforme_de_photographes"
     }
-
-    return parsedURL;
+    else {
+        return parsedURL;
+    }
 }
 
 // Exemples d'utilisation :
