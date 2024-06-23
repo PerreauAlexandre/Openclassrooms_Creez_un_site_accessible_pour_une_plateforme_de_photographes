@@ -1,33 +1,16 @@
-// function getOriginURL(url) {  
-//     // // On crée un objet URL à partir de l'URL de la page
-//     // const objectURL = new URL(url);
+function getOriginURL(url) {  
+    // On crée un objet URL à partir de l'URL de la page
+    const objectURL = new URL(url);
 
-//     // // On récupère l'origine de l'URL
-//     // const parsedURL = objectURL.origin;
+    // On récupère l'origine de l'URL
+    const parsedURL = objectURL.origin;
 
-//     // // Retourner l'URL modifiée
-//     // return parsedURL;
-
-// }
-
-function getOriginURL(url) {
-    try {
-        // Crée un objet URL à partir de l'URL donnée
-        let urlObject = new URL(url);
-
-        // Si le chemin se termine par un fichier (ex : page.html), enlève ce fichier
-        if (urlObject.pathname.endsWith('/')) {
-            // Si le chemin se termine par '/', on le garde tel quel
-            return urlObject.origin + urlObject.pathname;
-        } else {
-            // Sinon, enlève la dernière partie du chemin
-            let basePath = urlObject.pathname.substring(0, urlObject.pathname.lastIndexOf('/') + 1);
-            return urlObject.origin + basePath;
-        }
-    } catch (error) {
-        console.error('Invalid URL:', error);
-        return null;
+    // Retourner l'URL modifiée
+    if (parsedURL === "https://perreaualexandre.github.io") {
+        return "https://perreaualexandre.github.io/Openclassrooms_Creez_un_site_accessible_pour_une_plateforme_de_photographes"
     }
+
+    return parsedURL;
 }
 
 // Exemples d'utilisation :
