@@ -54,6 +54,7 @@ class photographerTemplate {
         photographerTagline.textContent = this._tagline;
         const photographePortrait = document.querySelector(".portrait");
         photographePortrait.setAttribute("src", `assets/photographers/${this._portrait}`);
+        photographePortrait.setAttribute("alt", this._name);
     }
 
     fillUserPrice() {

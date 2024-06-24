@@ -62,32 +62,94 @@
 
 /* filtre */
 
-.filter-container{
+.sort-container{
     margin: 20px 100px 50px 100px;
     display: flex;
-    align-items: center;
 }
 
-.filter-text {
+.sort-text {
+    height: 69px;
+    display: flex;
+    align-items: center;
     margin-right: 20px;
     font-size: 18px;
     font-weight: 700;
 }
 
-.filter {
+.dropdown {
+    position: relative;
+}
+
+.drop-btn {
     width: 170px;
     height: 69px;
+    padding: 0 20px;
     background-color: #901C1C;
     border-radius: 5px;
     font-size: 18px;
     font-weight: 700;
     color: #FFFFFF;
     text-align: center;
-    outline: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}                   
+
+.drop-btn:focus {
+    outline: 2px solid #000000;
 }
 
-.to-hide {
+.dropdown-content {
+    position: absolute;
+    top: 0;
+    left: 0;
     display: none;
+    flex-direction: column;
+    align-items: center;
+    background-color: #901C1C;
+    border-radius: 5px;
+}
+
+.sort-choice {
+    position: relative;
+    width: 170px;
+    height: 69px;
+    padding: 0 20px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #FFFFFF;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    z-index: 1;
+}
+
+.sort-choice--first {
+    order: 1;
+}
+
+.sort-choice--second {
+    order: 2;
+}
+
+.sort-choice--second i, .sort-choice--third i {
+    display: none;
+}
+
+.sort-choice--third {
+    order: 3;
+}
+
+.sort-choice--second::before, .sort-choice--third::before {
+    content:"";
+    position: absolute;
+    top: 0;
+    left: 10px;
+    width: 150px;
+    height: 1px;
+    background-color: #FFFFFF;
 }
 
 
@@ -214,6 +276,10 @@
     text-align: center;
 }
 
+.previous:hover, .next:hover, .previous:focus, .next:focus {
+    color: #DB8876;
+}
+
 .lightbox-media {
     height: 100%;
     width: calc(100% - 200px);
@@ -245,6 +311,10 @@
     top: 15px;
     cursor: pointer;
     filter : brightness(0) saturate(100%) invert(16%) sepia(77%) saturate(2464%) hue-rotate(349deg) brightness(87%) contrast(90%);
+}
+
+.close-lightbox:hover, .close-lightbox:focus {
+    filter: brightness(0) saturate(100%) invert(93%) sepia(46%) saturate(3552%) hue-rotate(301deg) brightness(91%) contrast(87%);
 }
 
 

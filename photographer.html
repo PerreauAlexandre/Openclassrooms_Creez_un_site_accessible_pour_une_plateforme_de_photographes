@@ -12,10 +12,10 @@
   <body>
     <header role=”banner”>
       <a href="./index.html" aria-current="page" class="logo">
-        <img src="assets/images/logo.png" class="logo" alt="fisheye - Page d'accueil"/>
+        <img src="assets/images/logo.png" class="logo" alt="Fisheye page d'acceuil"/>
       </a>
     </header>
-    <main id="main">
+    <main id="main" aria-hidden="false">
       <div class="photograph-header">
         <div class="photographer-attributes">
           <h1 class="name"></h1>
@@ -25,14 +25,19 @@
         <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
         <img class="portrait" src="" alt="">
       </div>
-      <div class="filter-container">
-        <div class="filter-text">Trier par</div>
-        <select class="filter">
-          <option class="to-hide">Filtrer</option>
-          <option>Popularité</option>
-          <option>Date</option>
-          <option>Titre</option>
-        </select>
+      <div class="sort-container">
+        <div class="sort-text">Trier par</div>
+        <div class="dropdown">
+          <button class="drop-btn" aria-haspopup="true" aria-expanded="false">
+            <div>-</div>
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="dropdown-content">
+              <a href="#" class="sort-choice sort-choice--first" data-sort="Popularité">Popularité<i class="fa-solid fa-chevron-up"></i></a>
+              <a href="#" class="sort-choice sort-choice--second" data-sort="Date">Date<i class="fa-solid fa-chevron-up"></i></a>
+              <a href="#" class="sort-choice sort-choice--third" data-sort="Titre">Titre<i class="fa-solid fa-chevron-up"></i></a>
+          </div>
+        </div>
       </div>
       <div class="media-section"></div>
       <aside class="additionnal-informations">
@@ -40,24 +45,24 @@
         <div class="price"></div>
       </aside>
       <div class="lightbox">
-        <div class="lightbox-container">
+        <div class="lightbox-container" aria-label="Vue lightbox">
           <div class="lightbox-content">
-            <button class="previous" aria-label="previous"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="previous" aria-label="Image précédente"><i class="fa-solid fa-chevron-left"></i></button>
             <div class="lightbox-media">
               <img src="" alt="">
               <div class="media-title"></div>
             </div>
-            <button class="next" aria-label="next"><i class="fa-solid fa-chevron-right"></i></button>
+            <button class="next" aria-label="Image suivante"><i class="fa-solid fa-chevron-right"></i></button>
           </div>
-          <img class="close-lightbox" src="assets/icons/close.svg">
+          <img class="close-lightbox" src="assets/icons/close.svg" aria-label="Fermer la lightbox">
         </div>
       </div>
     </main>
-    <div id="contact_modal">
+    <div id="contact_modal" role="dialog" aria-describedby="modal-photographer-name">
 			<div class="modal">
 				<header>
           <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
+          <img src="assets/icons/close.svg" onclick="closeModal()" aria-label="Fermer la modale"/>
         </header>
         <h3 class="modal-photographer-name"></h3>
 				<form class="form">

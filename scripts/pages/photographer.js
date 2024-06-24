@@ -71,6 +71,7 @@ async function initPhotographerPage() {
 let mediasModel = [];
 let currentMediaIndex = 0;
 const mediaSection = document.querySelector(".media-section");
+const main = document.getElementById("main");
 
 initPhotographerPage();
 
@@ -82,15 +83,18 @@ const form = document.querySelector(".form");
 
 function displayModal() {
     modalContainer.style.display = "block";
+    main.setAttribute("aria-hidden", "true");
 }
 
 function closeModal() {
     modalContainer.style.display = "none";
+    main.setAttribute("aria-hidden", "false");
 }
 
 form.addEventListener("submit", (event) => {
     event.preventDefault();
     modalContainer.style.display = "none";
+    main.setAttribute("aria-hidden", "false");
     const inputFirstName = document.getElementById("first");
     console.log("Prénom : ", inputFirstName.value);
     const inputLastName = document.getElementById("last");
@@ -111,6 +115,7 @@ function launchLightbox(mediaId) {
     const mediaIndex = mediasModel.findIndex(media => media.id === mediaId);
     mediasModel[mediaIndex].fillLightbox();
     currentMediaIndex = mediaIndex;
+    main.setAttribute("aria-hidden", "true");
 }
 
 const closeLightboxBtn = document.querySelector(".close-lightbox");
@@ -118,10 +123,21 @@ closeLightboxBtn.addEventListener("click", closeLightbox);
 
 function closeLightbox() {
     lightbox.style.display = "none";
+    main.setAttribute("aria-hidden", "false");
 }
 
 const previousLightboxBtn = document.querySelector(".previous");
 previousLightboxBtn.addEventListener("click", previousLightbox);
+
+document.addEventListener("keydown", (e) => {
+    const key = e.key;
+
+    if (key === "ArrowRight") {
+        nextLightbox();
+    } else if (key === "ArrowLeft") {
+        previousLightbox();
+    }
+ });
 
 function previousLightbox() {
     if (currentMediaIndex === 0) {
@@ -147,6 +163,9 @@ function nextLightbox() {
 }
 
 
+
+
+
 // Gestion des likes
 
 function likeMedia(likeButton) {
@@ -158,15 +177,44 @@ function likeMedia(likeButton) {
 
 // Filtre 
 
-const filterBtn = document.querySelector(".filter");
-filterBtn.addEventListener("change", (e) => {
-    if (e.target.value === "Popularité") {
+const dropBtn = document.querySelector(".drop-btn");
+const dropdownContent = document.querySelector(".dropdown-content");
+dropBtn.addEventListener("click", () => {
+    dropBtn.style.display = "none";
+    dropdownContent.style.display = "flex";
+    this.setAttribute("aria-expanded", "false");
+});
+
+const sortChoices = document.querySelectorAll(".sort-choice");
+sortChoices.forEach((sortChoice) => sortChoice.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    dropdownContent.style.display = "none";
+    const dropBtnDiv = dropBtn.querySelector("div");
+    dropBtnDiv.innerText = sortChoice.dataset.sort;
+    dropBtn.style.display = "flex";
+    this.setAttribute("aria-expanded", "true");
+    if (sortChoice.classList.contains("sort-choice--second")) {
+        const actualSortChoiceFirst = document.querySelector(".sort-choice--first");
+        sortChoice.classList.remove("sort-choice--second");
+        sortChoice.classList.add("sort-choice--first");
+        actualSortChoiceFirst.classList.remove("sort-choice--first");
+        actualSortChoiceFirst.classList.add("sort-choice--second");
+    }
+    else if (sortChoice.classList.contains("sort-choice--third")) {
+        const actualSortChoiceFirst = document.querySelector(".sort-choice--first");
+        sortChoice.classList.remove("sort-choice--third");
+        sortChoice.classList.add("sort-choice--first");
+        actualSortChoiceFirst.classList.remove("sort-choice--first");
+        actualSortChoiceFirst.classList.add("sort-choice--third");
+    }
+    if (sortChoice.dataset.sort === "Popularité") {
         mediasModel.sort((a, b) => {
             return b.likes - a.likes;
         });
         // console.log(mediasModel);
     }
-    else if (e.target.value === "Date") {
+    else if (sortChoice.dataset.sort === "Date") {
         mediasModel.sort((a, b) => {
             const aDate = new Date(a.date);
             const bDate = new Date(b.date);
@@ -174,11 +222,10 @@ filterBtn.addEventListener("change", (e) => {
         });
         // console.log(mediasModel);
     }
-    else if (e.target.value === "Titre") {
+    else if (sortChoice.dataset.sort === "Titre") {
         mediasModel.sort((a, b) => a.title.localeCompare(b.title));
         // console.log(mediasModel);
     }
     mediaSection.innerHTML="";
     displayMedia();
-});
-    
+}));

@@ -53,6 +53,7 @@ class videoTemplate {
         likeLogo.classList.add("fa-heart");
         likeLogo.classList.add("like-logo");
         likeLogo.dataset.mediaId = this._id;
+        likeLogo.ariaLabel = "Likes";
 
         likeDiv.appendChild(likeNumber);
         likeDiv.appendChild(likeLogo);
