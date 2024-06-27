@@ -235,10 +235,15 @@
 }
 
 .like-logo {
+    color : #DB8876;
     margin-left: 10px;
     cursor: pointer;
 }
 
+.footer-like-logo {
+    margin-left: 10px;
+    color : #000000;
+}
 
 /* lightbox */
 

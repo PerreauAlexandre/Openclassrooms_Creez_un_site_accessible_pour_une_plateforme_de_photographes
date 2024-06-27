@@ -1,4 +1,4 @@
-class videoTemplate {
+class VideoTemplate {
     constructor(mediaData) {
         this._id = mediaData.id;
         this._title = mediaData.title;
@@ -8,22 +8,22 @@ class videoTemplate {
         this._isLiked = false;
     }
 
-    get likes () {
+    get likes() {
         return this._likes;
     }
 
-    get id () {
+    get id() {
         return this._id;
     }
 
-    get date () {
+    get date() {
         return this._date;
     }
 
-    get title () {
+    get title() {
         return this._title;
     }
-    
+
     getMediaCardDOM() {
         const article = document.createElement("article");
 
@@ -85,11 +85,13 @@ class videoTemplate {
             this._likes++;
             likeLogo.previousSibling.textContent = this._likes;
             this._isLiked = true;
+            likeLogo.style.color = "#901C1C";
         }
         else {
             this._likes--;
             likeLogo.previousSibling.textContent = this._likes;
             this._isLiked = false;
+            likeLogo.style.color = "#DB8876";
         }
     }
 }

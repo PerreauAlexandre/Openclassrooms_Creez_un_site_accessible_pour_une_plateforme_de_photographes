@@ -1,4 +1,4 @@
-class imageTemplate {
+class ImageTemplate {
     constructor(mediaData) {
         this._id = mediaData.id;
         this._title = mediaData.title;
@@ -8,19 +8,19 @@ class imageTemplate {
         this._isLiked = false;
     }
 
-    get likes () {
+    get likes() {
         return this._likes;
     }
 
-    get id () {
+    get id() {
         return this._id;
     }
 
-    get date () {
+    get date() {
         return this._date;
     }
 
-    get title () {
+    get title() {
         return this._title;
     }
 
@@ -86,11 +86,13 @@ class imageTemplate {
             this._likes++;
             likeLogo.previousSibling.textContent = this._likes;
             this._isLiked = true;
+            likeLogo.style.color = "#901C1C";
         }
         else {
             this._likes--;
             likeLogo.previousSibling.textContent = this._likes;
             this._isLiked = false;
+            likeLogo.style.color = "#DB8876";
         }
     }
 }

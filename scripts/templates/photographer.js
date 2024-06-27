@@ -1,4 +1,4 @@
-class photographerTemplate {
+class PhotographerTemplate {
     constructor(data) {
         this._name = data.name;
         this._city = data.city;
@@ -65,5 +65,5 @@ class photographerTemplate {
     fillUserNameModal() {
         const madalPhotographerName = document.querySelector(".modal-photographer-name");
         madalPhotographerName.textContent = this._name;
-    }    
+    }
 }

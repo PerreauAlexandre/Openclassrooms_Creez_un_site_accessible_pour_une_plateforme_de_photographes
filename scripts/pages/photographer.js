@@ -1,4 +1,4 @@
-function getPhotographerId () {
+function getPhotographerId() {
     // On récupère l'URL de la page
     const currentURL = window.location.href;
 
@@ -44,7 +44,7 @@ function displayLikes() {
     const likeLogo = document.createElement("i");
     likeLogo.classList.add("fa-solid");
     likeLogo.classList.add("fa-heart");
-    likeLogo.classList.add("like-logo");
+    likeLogo.classList.add("footer-like-logo");
 
     totalLikes.appendChild(likeLogo);
 }
@@ -52,11 +52,11 @@ function displayLikes() {
 async function initPhotographerPage() {
     // Récupère les datas du photographe et de ses différents médias
     const photographerId = parseInt(getPhotographerId());
-    const { photographers, media } = await getDatas();
-    
+    const {photographers, media} = await getDatas();
+
     // On récupère et on traite les données du photographe
     const photographer = photographers.find(photographer => photographer.id === photographerId);
-    const photographerModel = new photographerTemplate(photographer);
+    const photographerModel = new PhotographerTemplate(photographer);
     photographerModel.fillUserInformations();
     photographerModel.fillUserPrice();
     photographerModel.fillUserNameModal();
@@ -83,18 +83,15 @@ const form = document.querySelector(".form");
 
 function displayModal() {
     modalContainer.style.display = "block";
-    main.setAttribute("aria-hidden", "true");
 }
 
 function closeModal() {
     modalContainer.style.display = "none";
-    main.setAttribute("aria-hidden", "false");
 }
 
 form.addEventListener("submit", (event) => {
     event.preventDefault();
     modalContainer.style.display = "none";
-    main.setAttribute("aria-hidden", "false");
     const inputFirstName = document.getElementById("first");
     console.log("Prénom : ", inputFirstName.value);
     const inputLastName = document.getElementById("last");
@@ -115,7 +112,6 @@ function launchLightbox(mediaId) {
     const mediaIndex = mediasModel.findIndex(media => media.id === mediaId);
     mediasModel[mediaIndex].fillLightbox();
     currentMediaIndex = mediaIndex;
-    main.setAttribute("aria-hidden", "true");
 }
 
 const closeLightboxBtn = document.querySelector(".close-lightbox");
@@ -123,7 +119,6 @@ closeLightboxBtn.addEventListener("click", closeLightbox);
 
 function closeLightbox() {
     lightbox.style.display = "none";
-    main.setAttribute("aria-hidden", "false");
 }
 
 const previousLightboxBtn = document.querySelector(".previous");
@@ -137,7 +132,7 @@ document.addEventListener("keydown", (e) => {
     } else if (key === "ArrowLeft") {
         previousLightbox();
     }
- });
+});
 
 function previousLightbox() {
     if (currentMediaIndex === 0) {
@@ -162,10 +157,7 @@ function nextLightbox() {
     mediasModel[currentMediaIndex].fillLightbox();
 }
 
-
-
-
-
+ 
 // Gestion des likes
 
 function likeMedia(likeButton) {
@@ -175,14 +167,14 @@ function likeMedia(likeButton) {
 }
 
 
-// Filtre 
+// Filtre
 
 const dropBtn = document.querySelector(".drop-btn");
 const dropdownContent = document.querySelector(".dropdown-content");
 dropBtn.addEventListener("click", () => {
     dropBtn.style.display = "none";
     dropdownContent.style.display = "flex";
-    this.setAttribute("aria-expanded", "false");
+    dropBtn.setAttribute("aria-expanded", "true");
 });
 
 const sortChoices = document.querySelectorAll(".sort-choice");
@@ -193,7 +185,7 @@ sortChoices.forEach((sortChoice) => sortChoice.addEventListener("click", (e) => 
     const dropBtnDiv = dropBtn.querySelector("div");
     dropBtnDiv.innerText = sortChoice.dataset.sort;
     dropBtn.style.display = "flex";
-    this.setAttribute("aria-expanded", "true");
+    dropBtn.setAttribute("aria-expanded", "false");
     if (sortChoice.classList.contains("sort-choice--second")) {
         const actualSortChoiceFirst = document.querySelector(".sort-choice--first");
         sortChoice.classList.remove("sort-choice--second");
