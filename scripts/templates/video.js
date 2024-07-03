@@ -33,8 +33,12 @@ class VideoTemplate {
         a.dataset.mediaId = this._id;
         const video = document.createElement("video");
         video.src = `assets/medias/${this._video}`;
+        const span = document.createElement("span");
+        span.textContent = `Aperçu - ${this._title}`;
+        span.classList.add("video-text");
 
         a.appendChild(video);
+        a.appendChild(span);
         article.appendChild(a);
 
         const informationDiv = document.createElement("div");

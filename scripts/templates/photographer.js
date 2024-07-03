@@ -16,7 +16,7 @@ class PhotographerTemplate {
         a.href = `./photographer.html?id=${this._id}`;
         const img = document.createElement("img");
         img.src = `assets/photographers/${this._portrait}`;
-        img.alt = this._name;
+        img.alt = `Aperçu - ${this._name}`;
         const h2 = document.createElement("h2");
         h2.textContent = this._name;
 

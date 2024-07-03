@@ -245,6 +245,10 @@
     color : #000000;
 }
 
+.video-text {
+    display: none;
+}
+
 /* lightbox */
 
 .lightbox {

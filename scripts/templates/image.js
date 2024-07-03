@@ -33,7 +33,7 @@ class ImageTemplate {
         a.dataset.mediaId = this._id;
         const img = document.createElement("img");
         img.src = `assets/medias/${this._image}`;
-        img.alt = this._title;
+        img.alt = `Aperçu - ${this._title}`;
 
         a.appendChild(img);
         article.appendChild(a);
@@ -72,7 +72,7 @@ class ImageTemplate {
 
         const img = document.createElement("img");
         img.src = `assets/medias/${this._image}`;
-        img.alt = this._title;
+        img.alt = `Aperçu - ${this._title}`;
         const mediaTitle = document.createElement("div");
         mediaTitle.textContent = this._title;
         mediaTitle.classList.add("media-title");
