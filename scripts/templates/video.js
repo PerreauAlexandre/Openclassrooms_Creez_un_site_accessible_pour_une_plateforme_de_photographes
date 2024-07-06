@@ -52,12 +52,13 @@ class VideoTemplate {
         const likeNumber = document.createElement("div");
         likeNumber.textContent = this._likes;
         likeNumber.classList.add("like-number");
-        const likeLogo = document.createElement("i");
+        const likeLogo = document.createElement("div");
         likeLogo.classList.add("fa-solid");
         likeLogo.classList.add("fa-heart");
         likeLogo.classList.add("like-logo");
         likeLogo.dataset.mediaId = this._id;
         likeLogo.ariaLabel = "Likes";
+        likeLogo.tabIndex = 0;
 
         likeDiv.appendChild(likeNumber);
         likeDiv.appendChild(likeLogo);

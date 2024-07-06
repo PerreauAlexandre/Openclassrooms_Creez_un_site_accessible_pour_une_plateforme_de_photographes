@@ -9,6 +9,25 @@ initPhotographerPage();
 
 // Photographer page functions
 
+async function initPhotographerPage() {
+    // Récupère les datas du photographe et de ses différents médias
+    const photographerId = parseInt(getPhotographerId());
+    const {photographers, media} = await getDatas();
+
+    // On récupère et on traite les données du photographe
+    const photographer = photographers.find(photographer => photographer.id === photographerId);
+    const photographerModel = new PhotographerTemplate(photographer);
+    photographerModel.fillUserInformations();
+    photographerModel.fillUserPrice();
+    photographerModel.fillUserNameModal();
+
+    // On filtre et on traite les médias du photographe
+    const photographerMedias = media.filter(media => media.photographerId === photographerId);
+    mediasModel = photographerMedias.map(photographerMedia => new MediaTemplateFactorie(photographerMedia));
+    displayMedia();
+    displayLikes();
+}
+
 function getPhotographerId() {
     // On récupère l'URL de la page
     const currentURL = window.location.href;
@@ -41,7 +60,14 @@ function displayMedia() {
 
     // On crée les évènement au clic pour gérer les likes
     const likesButtons = document.querySelectorAll(".like-logo");
-    likesButtons.forEach((likeButton) => likeButton.addEventListener("click", () => likeMedia(likeButton)));
+    likesButtons.forEach((likeButton) => {
+        likeButton.addEventListener("click", () => likeMedia(likeButton));
+        likeButton.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                likeMedia(likeButton);
+            }
+        });
+    });
 }
 
 function displayLikes() {
@@ -58,25 +84,6 @@ function displayLikes() {
     likeLogo.classList.add("footer-like-logo");
 
     totalLikes.appendChild(likeLogo);
-}
-
-async function initPhotographerPage() {
-    // Récupère les datas du photographe et de ses différents médias
-    const photographerId = parseInt(getPhotographerId());
-    const {photographers, media} = await getDatas();
-
-    // On récupère et on traite les données du photographe
-    const photographer = photographers.find(photographer => photographer.id === photographerId);
-    const photographerModel = new PhotographerTemplate(photographer);
-    photographerModel.fillUserInformations();
-    photographerModel.fillUserPrice();
-    photographerModel.fillUserNameModal();
-
-    // On filtre et on traite les médias du photographe
-    const photographerMedias = media.filter(media => media.photographerId === photographerId);
-    mediasModel = photographerMedias.map(photographerMedia => new MediaTemplateFactorie(photographerMedia));
-    displayMedia();
-    displayLikes();
 }
 
 
@@ -129,6 +136,7 @@ form.addEventListener("submit", (event) => {
     console.log("Email : ", inputEmail.value);
     const inputMessage = document.getElementById("textarea");
     console.log("Message : ", inputMessage.value);
+    form.reset();
 });
 
 
@@ -170,9 +178,6 @@ function closeLightbox() {
     header.removeAttribute("inert");
 }
 
-const previousLightboxBtn = document.querySelector(".previous");
-previousLightboxBtn.addEventListener("click", previousLightbox);
-
 document.addEventListener("keydown", (e) => {
     const key = e.key;
 
@@ -182,6 +187,9 @@ document.addEventListener("keydown", (e) => {
         previousLightbox();
     }
 });
+
+const previousLightboxBtn = document.querySelector(".previous");
+previousLightboxBtn.addEventListener("click", previousLightbox);
 
 function previousLightbox() {
     if (currentMediaIndex === 0) {
@@ -216,7 +224,7 @@ function likeMedia(likeButton) {
 }
 
 
-// Filtre
+// Tri
 
 const dropBtn = document.querySelector(".drop-btn");
 const dropdownContent = document.querySelector(".dropdown-content");

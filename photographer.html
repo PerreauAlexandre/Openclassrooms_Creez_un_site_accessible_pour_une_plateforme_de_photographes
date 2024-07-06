@@ -33,12 +33,12 @@
         <div class="dropdown">
           <button class="drop-btn" aria-haspopup="true" aria-expanded="false">
             <div>-</div>
-            <i class="fa-solid fa-chevron-down"></i>
+            <div class="fa-solid fa-chevron-down"></div>
           </button>
           <div class="dropdown-content">
-              <a href="#" class="sort-choice sort-choice--first" data-sort="Popularité">Popularité<i class="fa-solid fa-chevron-up"></i></a>
-              <a href="#" class="sort-choice sort-choice--second" data-sort="Date">Date<i class="fa-solid fa-chevron-up"></i></a>
-              <a href="#" class="sort-choice sort-choice--third" data-sort="Titre">Titre<i class="fa-solid fa-chevron-up"></i></a>
+              <a href="#" class="sort-choice sort-choice--first" data-sort="Popularité">Popularité<div class="fa-solid fa-chevron-up"></div></a>
+              <a href="#" class="sort-choice sort-choice--second" data-sort="Date">Date<div class="fa-solid fa-chevron-up"></div></a>
+              <a href="#" class="sort-choice sort-choice--third" data-sort="Titre">Titre<div class="fa-solid fa-chevron-up"></div></a>
           </div>
         </div>
       </div>
@@ -51,21 +51,21 @@
     <div class="lightbox">
       <div class="lightbox-container" aria-label="Vue lightbox">
         <div class="lightbox-content">
-          <button class="previous" aria-label="Image précédente"><i class="fa-solid fa-chevron-left"></i></button>
+          <button class="previous" aria-label="Image précédente"><div class="fa-solid fa-chevron-left"></div></button>
           <div class="lightbox-media">
             <img src="" alt="">
             <div class="media-title"></div>
           </div>
-          <button class="next" aria-label="Image suivante"><i class="fa-solid fa-chevron-right"></i></button>
+          <button class="next" aria-label="Image suivante"><div class="fa-solid fa-chevron-right"></div></button>
         </div>
-        <img class="close-lightbox" src="assets/icons/close.svg" tabindex="0" aria-label="Fermer la lightbox">
+        <img class="close-lightbox" src="assets/icons/close.svg" tabindex="0" alt="Fermer la lightbox">
       </div>
     </div>
     <div id="contact_modal" role="dialog">
 			<div class="modal">
 				<header>
           <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" class="close-modal" tabindex="0" onclick="closeModal()" aria-label="Fermer la modale"/>
+          <img src="assets/icons/close.svg" class="close-modal" tabindex="0" onclick="closeModal()" alt="Fermer la modale"/>
         </header>
         <h3 class="modal-photographer-name"></h3>
 				<form class="form">
